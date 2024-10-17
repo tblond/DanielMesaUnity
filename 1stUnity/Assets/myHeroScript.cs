@@ -4,16 +4,46 @@ using UnityEngine;
 
 public class myHeroScript : MonoBehaviour
 {
-    // Start is called before the first frame update
+    float runningSpeed = 3;
+    float turningSpeed = 45;
+   
     void Start()
     {
         transform.position += new Vector3(0,1,0);   
     }
 
-    // Update is called once per frame
+   
     void Update()
     {
+        
+        if (Input.GetKey(KeyCode.W))
+            
 
-      transform.position += new Vector3(0, 1, 0)*Time.deltaTime;
+
+            {
+                transform.position += runningSpeed*transform.forward  * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.position -=  runningSpeed*transform.forward * Time.deltaTime;
+
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.Rotate(Vector3.up, runningSpeed*turningSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.Rotate(Vector3.up, runningSpeed*(-turningSpeed) * Time.deltaTime);
+        }
+        if (Input.GetKey(KeyCode.Space))
+        {
+            transform.position += runningSpeed * transform.up * Time.deltaTime;
+        }
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            transform.position -= runningSpeed * transform.up * Time.deltaTime;
+        }
+
     }
 }
