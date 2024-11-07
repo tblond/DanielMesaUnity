@@ -6,7 +6,7 @@ public class explodeScript : MonoBehaviour
 {
     Rigidbody rb;
     float explosionRadius = 30f;
-    float explosionStrength = 10000f;
+    float explosionStrength = 1000f;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,15 +25,22 @@ public class explodeScript : MonoBehaviour
         Collider[] allVictimColliders = Physics.OverlapSphere(transform.position, explosionRadius);
         foreach (Collider collider in allVictimColliders)
         {
-            Rigidbody rigidbody = collider.GetComponent<Rigidbody>();
-            if (rigidbody != null)
+            personScript personVictim = collider.GetComponent<personScript>();
+            if (personVictim != null)
             {
-                rigidbody.AddExplosionForce(explosionStrength,transform.position, explosionRadius);
+                personVictim.explosionAt(transform.position, explosionRadius, explosionStrength);
             }
+            else
+            {
+                Rigidbody rigidbody = collider.GetComponent<Rigidbody>();
+                if (rigidbody != null)
+                {
+                    rigidbody.AddExplosionForce(explosionStrength, transform.position, explosionRadius);
+                }
+            }
+
+            Destroy(gameObject);
         }
 
-        Destroy(gameObject);
     }
-
-
 }
