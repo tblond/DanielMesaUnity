@@ -8,7 +8,8 @@ public class EdAnimationScript : MonoBehaviour
     float forwardSpeed = 1.5f;
     float backwardSpeed = .5f;
     float runningSpeed = 3f;
-    float turningSpeed = 10f;
+    float turningSpeed = 15f;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -31,7 +32,7 @@ public class EdAnimationScript : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
 
         {
-            //Make Ed walk in animations and move forward
+            //Make character walk backward
             edAnimator.SetBool("isWalkingBackward", true);
             transform.position -= backwardSpeed * transform.forward * Time.deltaTime;
             
@@ -41,7 +42,7 @@ public class EdAnimationScript : MonoBehaviour
         if (Input.GetKey(KeyCode.W) && Input.GetKey (KeyCode.LeftShift))
 
         {
-            //Make Ed walk in animations and move forward
+            //Make character run forward
             edAnimator.SetBool("isRunning", true);
             transform.position += runningSpeed * transform.forward * Time.deltaTime;
 
@@ -63,6 +64,27 @@ public class EdAnimationScript : MonoBehaviour
         {
             transform.Rotate(Vector3.down, runningSpeed * (-turningSpeed) * Time.deltaTime);
         }
+
+        edAnimator.SetBool("backwardrun", false);
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.LeftShift))
+
+        {
+            //Make character run forward
+            edAnimator.SetBool("backwardrun", true);
+            transform.position -= runningSpeed * transform.forward * Time.deltaTime;
+
+
+        }
+      
+        //edAnimator.SetBool("jumpup", false);
+        // if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //make character greet
+        //edAnimator.SetBool("jumpup", true);
+
+
+        //}
+
 
     }
 }
