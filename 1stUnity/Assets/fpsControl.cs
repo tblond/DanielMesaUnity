@@ -6,6 +6,7 @@ public class fpsControl : MonoBehaviour
 {
     public GameObject capsuleCloneTemplate;
     float speed = 3;
+    float runningSpeed =10f;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -21,6 +22,17 @@ public class fpsControl : MonoBehaviour
             transform.position += speed * fpsMovementDirection * Time.deltaTime;
 
         }
+        
+        
+            if (Input.GetKey(KeyCode.W) && Input.GetKey(KeyCode.LeftControl))
+            {
+                Vector3 fpsMovementDirection = new Vector3(transform.forward.x, 0, transform.forward.z);
+                fpsMovementDirection.Normalize();
+                transform.position += runningSpeed * fpsMovementDirection * Time.deltaTime;
+
+
+            }
+        
         if (Input.GetKey(KeyCode.S))
         {
             Vector3 fpsMovementDirection = new Vector3(transform.forward.x, 0, transform.forward.z);
